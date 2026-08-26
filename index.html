@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="modern">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio & Mindset</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Time Machine Themes */
+    :root[data-theme="modern"] {
+      --bg: #0d0f12;
+      --card-bg: #161b22;
+      --text: #e6edf3;
+      --text-dim: #8b949e;
+      --accent: #10b981;
+      --border: #30363d;
+      --font-main: 'Inter', sans-serif;
+      --font-code: 'Fira Code', monospace;
+      --radius: 8px;
+    }
+
+    :root[data-theme="90s"] {
+      --bg: #008080;
+      --card-bg: #c0c0c0;
+      --text: #000000;
+      --text-dim: #404040;
+      --accent: #000080;
+      --border: #ffffff;
+      --font-main: 'Times New Roman', serif;
+      --font-code: 'Courier New', monospace;
+      --radius: 0px;
+    }
+
+    :root[data-theme="2000s"] {
+      --bg: #111122;
+      --card-bg: #1a1a3a;
+      --text: #00ffcc;
+      --text-dim: #ff00ff;
+      --accent: #ffcc00;
+      --border: #ff00ff;
+      --font-main: 'Comic Sans MS', 'Arial', sans-serif;
+      --font-code: monospace;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-code);
+      font-size: 0.85rem;
+      color: var(--accent);
+      background: rgba(16, 185, 129, 0.1);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+      border: 1px solid var(--accent);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
+
+    blockquote {
+      font-style: italic;
+      color: var(--text-dim);
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      margin: 1rem 0;
+    }
+
+    blockquote cite {
+      display: block;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      color: var(--text);
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+      font-family: var(--font-code);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      font-family: var(--font-code);
+      font-size: 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* Terminal */
+    .terminal {
+      background: #000;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      font-family: var(--font-code);
+      font-size: 0.9rem;
+      color: #00ff00;
+    }
+
+    .terminal-output {
+      margin-bottom: 0.5rem;
+      white-space: pre-wrap;
+    }
+
+    .terminal-input-line {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .terminal-input-line input {
+      background: transparent;
+      border: none;
+      color: #00ff00;
+      font-family: var(--font-code);
+      font-size: 0.9rem;
+      width: 100%;
+      outline: none;
+    }
+
+    /* Time Machine Controls */
+    .time-machine {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      background: var(--card-bg);
+      padding: 0.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .time-machine span {
+      font-size: 0.85rem;
+      font-family: var(--font-code);
+      margin-right: auto;
+      color: var(--text-dim);
+    }
+
+    .time-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--font-code);
+    }
+
+    .time-btn:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Time Machine Controls -->
+    <div class="time-machine">
+      <span>🕹️ Time Machine:</span>
+      <button class="time-btn" onclick="setTheme('90s')">90s Web</button>
+      <button class="time-btn" onclick="setTheme('2000s')">2000s Flash Era</button>
+      <button class="time-btn" onclick="setTheme('modern')">Present</button>
+    </div>
+
+    <!-- Hero / Header -->
+    <header>
+      <div class="status-badge">
+        <span class="status-dot"></span> Status: Learning
+      </div>
+      
+      <blockquote>
+        “You have power over your mind - not outside events. Realize this, and you will find strength.”
+        <cite>— Marcus Aurelius, Meditations</cite>
+      </blockquote>
+    </header>
+
+    <!-- Areas of Focus -->
+    <section>
+      <h2>> what_i_do</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Development & Automation</h3>
+          <p>Building web applications, scripts, data science workflows, and process automation tools.</p>
+        </div>
+        <div class="card">
+          <h3>3D & Design</h3>
+          <p>3D modeling and exploring interactive visual interfaces.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interests & Philosophy -->
+    <section>
+      <h2>> interests_&_vibes</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Mechanics & Science</h3>
+          <p>Fascinated by mechanical systems, technical maintenance, and empirical problem-solving.</p>
+        </div>
+        <div class="card">
+          <h3>Culture & Media</h3>
+          <p>80s J-Pop, cinema, self-improvement, gym, and the golden era of Flash games (Newgrounds).</p>
+        </div>
+        <div class="card">
+          <h3>🎮 Steam Activity</h3>
+          <p id="steam-activity">Loading recent gaming stats...</p>
+          <div class="tags">
+            <span class="tag">PC Gaming</span>
+            <span class="tag">Retro</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section>
+      <h2>> project_showroom</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>[Project #1]</h3>
+          <p>Brief description of your custom tool, automation script, or web app hosted on GitHub.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>[Project #2]</h3>
+          <p>Open-source utility or personalized dashboard solution.</p>
+          <div class="tags">
+            <span class="tag">Web</span>
+            <span class="tag">Data</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Terminal Easter Egg -->
+    <section>
+      <h2>> interactive_terminal</h2>
+      <div class="terminal">
+        <div class="terminal-output" id="terminal-output">Type 'help' to view available commands.</div>
+        <div class="terminal-input-line">
+          <span>$</span>
+          <input type="text" id="terminal-input" placeholder="e.g. help, quote, theme 90s, clear" autofocus>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <footer>
+      <p>Built with pure HTML/CSS/JS — Hosted on GitHub Pages</p>
+      <p style="margin-top: 0.5rem;">
+        <a href="https://github.com" target="_blank">GitHub Profile</a>
+      </p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Theme Switcher
+    function setTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+    }
+
+    // Steam Activity (Placeholder)
+    document.getElementById('steam-activity').innerText = "Recent titles explored: Strategy, retro classics, and indie titles.";
+
+    // Terminal Logic
+    const input = document.getElementById('terminal-input');
+    const output = document.getElementById('terminal-output');
+
+    const commands = {
+      'help': 'Available commands:\n - quote: Displays a Stoic quote\n - theme [90s|2000s|modern]: Switches visual style era\n - clear: Clears terminal output\n - flash: A tribute to the Newgrounds era',
+      'quote': '“The impediment to action advances action. What stands in the way becomes the way.” — Marcus Aurelius',
+      'flash': '⚡ Newgrounds rulez! Flash games shaped the wild west of the web.',
+      'clear': ''
+    };
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const fullCmd = this.value.trim().toLowerCase();
+        const args = fullCmd.split(' ');
+        const cmd = args[0];
+        
+        this.value = '';
+
+        if (cmd === 'clear') {
+          output.innerText = '';
+          return;
+        }
+
+        if (cmd === 'theme') {
+          if (['90s', '2000s', 'modern'].includes(args[1])) {
+            setTheme(args[1]);
+            output.innerText += `\n$ ${fullCmd}\nEra switched to: ${args[1]}`;
+          } else {
+            output.innerText += `\n$ ${fullCmd}\nUsage: theme 90s | theme 2000s | theme modern`;
+          }
+        } else if (commands[cmd]) {
+          output.innerText += `\n$ ${fullCmd}\n${commands[cmd]}`;
+        } else if (cmd !== '') {
+          output.innerText += `\n$ ${fullCmd}\nCommand not recognized. Type 'help'.`;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
